@@ -15,9 +15,9 @@ import collections
 import time
 from time import sleep
 
-waktu_awal = raw_input("Enter waktu mulai - Exp(yyyymmdd): ")
+waktu_awal = raw_input("Enter Start Date - Exp(yyyymmdd): ") #mengisi waktu awal
 str_waktuawal = str(waktu_awal)
-waktu_akhir = str(raw_input("Enter waktu akhir - Exp(yyyymmdd): "))
+waktu_akhir = str(raw_input("Enter End Date  - Exp(yyyymmdd): "))#mengisi waktu akhir
 
 a = datetime.strptime(waktu_awal, '%Y%m%d')
 b = datetime.strptime(waktu_akhir, '%Y%m%d') 
@@ -37,7 +37,7 @@ for i in range(jumlah):
         ddlist = int(jj.strftime("%d"))+1
         print dtlist, yylist, mmlist, ddlist
 
-        api = SentinelAPI('fikrul02', 'zse123mko123',
+        api = SentinelAPI('username', 'password',
                           'https://scihub.copernicus.eu/dhus',
                           show_progressbars=True)
 
@@ -47,7 +47,7 @@ for i in range(jumlah):
         products = api.query(footprint,
                             date= (dtlist, date(yylist, mmlist, ddlist)),
                             platformname='Sentinel-2',
-                            cloudcoverpercentage=(0, 15),
+                            cloudcoverpercentage=(0, 15), #cloud cover percentage antara 0% sampai dengan 15%
                             producttype = 'S2MSI1C')
         getid = collections.OrderedDict(sorted(products.items(), key=lambda x:x[1]))
         key_getid = getid.keys()
@@ -55,9 +55,9 @@ for i in range(jumlah):
         print str(product_info['title'])
         
         #download all results from the search
-        api.download_all(products, directory_path='D:/GET_SENTINEL/DOWNLOAD', checksum=True)
+        api.download_all(products, directory_path='./GET_SENTINEL/DOWNLOAD', checksum=True)
         with click.progressbar(length=total_size, label='Downloading files') as bar:
-            for file in api.download_all(products, directory_path='D:/GET_SENTINEL/DOWNLOAD', checksum=True):
+            for file in api.download_all(products, directory_path='./GET_SENTINEL/DOWNLOAD', checksum=True):
                 download(file)
                 bar.update(file.size)
     except Exception:
