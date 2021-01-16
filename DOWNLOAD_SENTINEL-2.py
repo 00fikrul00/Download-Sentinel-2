@@ -24,7 +24,7 @@ b = datetime.strptime(waktu_akhir, '%Y%m%d')
 delta = b - a
 jumlah = int(delta.days) + 1
 
-path = 'D:/GET_SENTINEL'
+path = './GET_SENTINEL'
 ingeojson = glob(os.path.join(path + '/' +'**.geojson'))
 print ingeojson[0]
 
