@@ -14,7 +14,7 @@ from collections import OrderedDict
 import collections
 import time
 from time import sleep
-
+#digunakan untuk mendownload Sentinel-2
 waktu_awal = raw_input("Enter Start Date - Exp(yyyymmdd): ") #mengisi waktu awal
 str_waktuawal = str(waktu_awal)
 waktu_akhir = str(raw_input("Enter End Date  - Exp(yyyymmdd): "))#mengisi waktu akhir
